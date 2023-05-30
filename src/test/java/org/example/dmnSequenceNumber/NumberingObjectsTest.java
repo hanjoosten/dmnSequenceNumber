@@ -61,7 +61,8 @@ public class NumberingObjectsTest {
                 .when()
                 .post("/numberingObjects")
                 .then()
+                .log().all()
                 .statusCode(200)
-                .body("/numberedList[2].sequenceNumber", is(2));
+                .body("numberedList[2].sequenceNumber", is(2));
     }
 }
