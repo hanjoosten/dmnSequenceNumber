@@ -26,7 +26,7 @@
       <dmn:requiredInput href="#_F117753D-E384-4101-9A1E-9F5463776ED2"/>
     </dmn:informationRequirement>
     <dmn:literalExpression id="_97D86FC3-1346-4DD8-81F9-B0CE66DDC26F">
-      <dmn:text>for i in [1..count(myList)] return myList[i]</dmn:text>
+      <dmn:text>for i in [1..count(myList)] return put context(context:myList[i],key:"sequenceNumber",value:i-1)</dmn:text>
     </dmn:literalExpression>
   </dmn:decision>
   <dmndi:DMNDI>
