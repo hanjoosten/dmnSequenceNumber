@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_61DDD1F7-4AAB-471C-ABF2-3D04BBFE8F10" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_1AF80F49-293E-44A1-90B6-56D7EB6410D7" name="numberingObjects" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_61DDD1F7-4AAB-471C-ABF2-3D04BBFE8F10">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_BC4E2090-E555-4895-82BB-A37B035DAEA7" name="MyObject" isCollection="false">
+    <dmn:itemComponent id="_82C83BD1-70E7-44BC-9DDC-7FDF20A38D15" name="sequenceNumber" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_CB314178-1D44-405D-9F7F-B3BCF7E3F07E" name="foo" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_02656F51-EAE1-49CE-8708-C9A35BD36B10" name="bar" isCollection="false">
+      <dmn:typeRef>date</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_2819960F-372C-4F81-A444-C8FE5A36AE19" name="MyObjects" isCollection="true">
+    <dmn:typeRef>MyObject</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_F117753D-E384-4101-9A1E-9F5463776ED2" name="myList">
+    <dmn:extensionElements/>
+    <dmn:variable id="_109E2316-6680-4D61-A076-4BD031DCF9C1" name="myList" typeRef="MyObjects"/>
+  </dmn:inputData>
+  <dmn:decision id="_B55AF2B1-F32C-45E4-8FC9-0015A279AC5E" name="numberedList">
+    <dmn:extensionElements/>
+    <dmn:variable id="_63F832B6-A42B-4EFE-8251-E66168D4849E" name="numberedList" typeRef="MyObjects"/>
+    <dmn:informationRequirement id="_4471173D-1509-4193-A6DD-C8B66F914CD7">
+      <dmn:requiredInput href="#_F117753D-E384-4101-9A1E-9F5463776ED2"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_97D86FC3-1346-4DD8-81F9-B0CE66DDC26F">
+      <dmn:text>for i in [1..count(myList)] return put context(context:myList[i],key:"sequenceNumber",value:i-1)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_F2ECE39A-A899-4414-8F7D-D483FC4FAE97" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_97D86FC3-1346-4DD8-81F9-B0CE66DDC26F">
+            <kie:width>982</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_F117753D-E384-4101-9A1E-9F5463776ED2" dmnElementRef="_F117753D-E384-4101-9A1E-9F5463776ED2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="264" y="490" width="129" height="51"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_B55AF2B1-F32C-45E4-8FC9-0015A279AC5E" dmnElementRef="_B55AF2B1-F32C-45E4-8FC9-0015A279AC5E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="279" y="370" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_4471173D-1509-4193-A6DD-C8B66F914CD7" dmnElementRef="_4471173D-1509-4193-A6DD-C8B66F914CD7">
+        <di:waypoint x="328.5" y="515.5"/>
+        <di:waypoint x="329" y="395"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
