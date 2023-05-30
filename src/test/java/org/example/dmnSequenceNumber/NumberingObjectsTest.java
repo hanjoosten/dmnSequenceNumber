@@ -38,30 +38,32 @@ public class NumberingObjectsTest {
     private int port;
 
     @Test
-    public void testEvaluateTrafficViolation() {
+    public void testEvaluateNumberedList() {
         RestAssured.port = port;
         given()
                 .body("{\n" +
                         "    \"myList\": [\n" +
                         "      {\n" +
-                        "        \"foo\": \"string\",\n" +
+                        "        \"foo\": \"first\",\n" +
                         "        \"bar\": \"2023-05-30\"\n" +
                         "      },\n" +
                         "      {\n" +
-                        "        \"foo\": \"string\",\n" +
+                        "        \"foo\": \"second\",\n" +
                         "        \"bar\": \"2023-05-30\"\n" +
                         "      },\n" +
                         "      {\n" +
-                        "        \"foo\": \"string\",\n" +
+                        "        \"foo\": \"last\",\n" +
                         "        \"bar\": \"2023-05-30\"\n" +
                         "      }\n" +
                         "    ]\n" +
                         "}")
                 .contentType(ContentType.JSON)
+                .log().all()
                 .when()
                 .post("/numberingObjects")
                 .then()
+                .log().all()
                 .statusCode(200)
-                .body("/numberedList[2].sequenceNumber", is(2));
+                .body("/numberedList[foo=\"last\"].sequenceNumber", is(2));
     }
 }
